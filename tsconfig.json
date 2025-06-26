@@ -12,7 +12,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    // "noEmit": true, // contentful-app-scripts will handle emission, so this can be false or removed.
+                       // Setting to false explicitly to indicate tsc can emit if run manually.
+    "noEmit": false,
+    "outDir": "./build/js", // Optional: specify outDir if you want tsc to also be able to output.
+                           // app-scripts might override or ignore this for its own build process.
+                           // For now, let's include it for clarity if tsc is run standalone.
     "jsx": "react-jsx"
   },
   "include": ["src"]

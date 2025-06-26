@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "contentful-app-scripts build",
+    "deploy": "contentful-app-scripts upload --bundle-dir ./build",
+    "deploy-ci": "contentful-app-scripts upload --bundle-dir ./build --ci",
+    "start": "contentful-app-scripts start"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@contentful/app-scripts": "^2.5.5",
     "@types/jest": "^30.0.0",
     "jest": "^30.0.3",
     "jest-environment-jsdom": "^30.0.2",
