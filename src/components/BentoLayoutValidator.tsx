@@ -5,9 +5,10 @@ import {
   Paragraph,
   List,
   ListItem,
-  Card as FormaCard, // Renaming to avoid conflict with CardEntry
+  Card as F36Card, // Renaming to avoid conflict with CardEntry
   Stack,
-} from '@contentful/forma-36-react-components';
+  Text, // For stronger text, replacing Paragraph with strong
+} from '@contentful/f36-components';
 import { PlainClientAPI } from 'contentful-management'; // Using PlainClientAPI for type
 import { Entry } from 'contentful'; // For Entry type
 
@@ -149,7 +150,7 @@ const BentoLayoutValidator: React.FC = () => {
 
   if (errorParsingLayout) {
     return (
-      <Note noteType="negative" title="Configuration Error">
+      <Note variant="negative" title="Configuration Error">
         {errorParsingLayout}
       </Note>
     );
@@ -159,7 +160,7 @@ const BentoLayoutValidator: React.FC = () => {
      // This case should ideally be covered by errorParsingLayout,
      // but as a fallback:
     return (
-      <Note noteType="warning" title="Configuration Missing">
+      <Note variant="warning" title="Configuration Missing">
         Bento layout configuration is not available. Cannot perform validation.
       </Note>
     );
@@ -168,25 +169,25 @@ const BentoLayoutValidator: React.FC = () => {
   return (
     <Stack flexDirection="column" spacing="spacingS" fullWidth>
       {validationErrors.length === 0 && (
-        <Note noteType="positive">
+        <Note variant="positive">
           Bento layout is valid!
         </Note>
       )}
       {validationErrors.length > 0 && (
-        <FormaCard testId="validation-errors-card">
-          <Paragraph>
-            <strong>Validation Issues:</strong>
-          </Paragraph>
-          <List>
+        <F36Card testId="validation-errors-card">
+          <Text fontWeight="fontWeightDemiBold" as="p" marginBottom="spacingS">
+            Validation Issues:
+          </Text>
+          <List style={{ listStyle: 'none', paddingLeft: 0}}>
             {validationErrors.map((error, index) => (
-              <ListItem key={index}>
-                <Note noteType={error.type === 'error' ? 'negative' : 'warning'}>
+              <ListItem key={index} style={{ marginBottom: 'var(--spacing-xs)'}}>
+                <Note variant={error.type === 'error' ? 'negative' : 'warning'}>
                   {error.message}
                 </Note>
               </ListItem>
             ))}
           </List>
-        </FormaCard>
+        </F36Card>
       )}
        {/* Display current layout and cards for debugging/transparency */}
        {/* <details>
